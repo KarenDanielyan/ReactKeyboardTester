@@ -1,12 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Header()
 {
-  return (
-    <header>
-      <h1>React Keyboard</h1>
-    </header>
-  )
+    const handleKeyPress = (event) => {
+        setText("You pressed: " + event.key)
+    }
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyPress);
+        return () => {
+            window.removeEventListener("keydown", handleKeyPress);
+        }
+    }, []);
+
+    const [text, setText] = useState('React Keyboard')
+    return (
+        <header>
+        <h1 onKeyDown={handleKeyPress}>{text}</h1>
+        </header>
+    )
 }
 
 export default Header
