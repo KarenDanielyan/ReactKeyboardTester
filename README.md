@@ -1,7 +1,7 @@
 # Keyboard Tester
 
 A simple web application to test keyboard input visually.
-This is my first project on react-js.
+This is my first project on `ReactJS`.
 
 ## Features
 
