@@ -1,17 +1,30 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import "./Keyboard.css";
 
-function Key(props) {
-    const key = props.letter;
+function Key({ letter }) {
+    const key = letter;
     const [active, setActive] = useState(false);
 
     const handleKeyDown = (event) => {
-        if (event.key === key.toLowerCase() || event.key === key.toUpperCase()) {
+        if (event.key === key || event.key === key.toLowerCase() || event.key === key.toUpperCase()) {
+            setActive(true);
+        }
+        else if (event.key === ' ' && key === 'Space') {
+            setActive(true);
+        }
+        else if (event.key === 'Control' && key === 'Ctrl') {
             setActive(true);
         }
     }
     const handleKeyUp = (event) => {
-        if (event.key === key.toLowerCase() || event.key === key.toUpperCase()) {
+        if (event.key === key || event.key === key.toLowerCase() || event.key === key.toUpperCase()) {
+            setActive(false);
+        }
+        else if (event.key === ' ' && key === 'Space') {
+            setActive(false);
+        }
+        else if (event.key === 'Control' && key === 'Ctrl') {
             setActive(false);
         }
     }
@@ -33,6 +46,10 @@ function Key(props) {
     );
 }
 
+Key.propTypes = {
+    letter: PropTypes.string.isRequired
+}
+
 function Keyboard() {
     return (
         <div className="keyboard">
@@ -44,7 +61,7 @@ function Keyboard() {
                 <Key letter={'='} />
             </div>
             <div className="r2">
-                <Key letter={'TAB'} />
+                <Key letter={'Tab'} />
                 <Key letter={'Q'} /> <Key letter={'W'} /> <Key letter={'E'} />
                 <Key letter={'R'} /> <Key letter={'T'} /> <Key letter={'Y'} />
                 <Key letter={'U'} /> <Key letter={'I'} /> <Key letter={'O'} />
@@ -52,26 +69,26 @@ function Keyboard() {
                 <Key letter={'\\'} />
             </div>
             <div className="r3">
-                <Key letter={'CAPS'} />
+                <Key letter={'CapsLock'} />
                 <Key letter={'A'} /> <Key letter={'S'} /> <Key letter={'D'} />
                 <Key letter={'F'} /> <Key letter={'G'} /> <Key letter={'H'} />
                 <Key letter={'J'} /> <Key letter={'K'} /> <Key letter={'L'} />
-                <Key letter={';'} /> <Key letter={'\''} /> <Key letter={'ENTER'} />
+                <Key letter={';'} /> <Key letter={'\''} /> <Key letter={'Enter'} />
             </div>
             <div className="r4">
-                <Key letter={'SHIFT'} />
+                <Key letter={'Shift'} />
                 <Key letter={'Z'} /> <Key letter={'X'} /> <Key letter={'C'} />
                 <Key letter={'V'} /> <Key letter={'B'} /> <Key letter={'N'} />
                 <Key letter={'M'} /> <Key letter={','} /> <Key letter={'.'} />
-                <Key letter={'/'} /> <Key letter={'SHIFT'} />
+                <Key letter={'/'} /> <Key letter={'Shift'} />
             </div>
             <div className="r5">
-                <Key letter={'CTRL'} />
+                <Key letter={'Ctrl'} />
                 <Key letter={'Fn'} />
-                <Key letter={'WIN'} /> <Key letter={'ALT'} />
-                <Key letter={'SPACE'} />
-                <Key letter={'ALT'} />
-                <Key letter={'CTRL'} />
+                <Key letter={'Win'} /> <Key letter={'Alt'} />
+                <Key letter={'Space'} />
+                <Key letter={'Alt'} />
+                <Key letter={'Ctrl'} />
             </div>
         </div>
     );
